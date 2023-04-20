@@ -23,10 +23,11 @@ function getAll(req, res) {
 // post request
 function addItem(req, res) {
   const { value } = req.body;
-  if(value == undefined) return res.status(400).json({message:" Please provide a value! "});
+  if (value == undefined)
+    return res.status(400).json({ message: " Please provide a value! " });
   ALLTODOS.push(value);
-  res.status(200).json({message:"success"});
-};
+  res.status(200).json({ message: "success" });
+}
 
 //get one Item
 function getItem(req, res) {
@@ -52,4 +53,8 @@ function updateItem(req, res) {
   return res.status(200).json(ALLTODOS[itemId]);
 }
 
-module.exports = { getAll, addItem, getItem, updateItem };
+function InvalidRequest(_, res) {
+  return res.status(400).json({ message: "Invalid url!" });
+}
+
+module.exports = { getAll, addItem, getItem, updateItem, InvalidRequest };
